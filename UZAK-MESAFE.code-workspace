@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "UZAK-MESAFE",
+			"path": "."
+		},
+		{
+			"name": "images",
+			"path": "../../UZAK-MESAFE/images"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "UZAK-MESAFE"
+	}
+}

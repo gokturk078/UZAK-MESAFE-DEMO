@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesafeleri Aşan Aşk | İstanbul ↔ Berlin</title>
+    <meta name="description" content="İki şehir, bir kalp. Uzak mesafe aşkımızın hikayesi.">
+
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&family=Open+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@1,400;1,500&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#1A1A2E',
+                        cosmic: '#4C1D95',
+                        indigo: '#312E81',
+                        starlight: '#FFD700',
+                        aurora: '#C084FC',
+                        hope: '#FDE68A',
+                        deep: '#0F0F1A',
+                        connection: '#3B82F6'
+                    },
+                    fontFamily: {
+                        display: ['DM Serif Display', 'serif'],
+                        heading: ['Inter', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif'],
+                        emotional: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #0F0F1A;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Starfield */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: var(--opacity);
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Aurora */
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(76, 29, 149, 0.1) 0%, rgba(49, 46, 129, 0.1) 50%, rgba(192, 132, 252, 0.05) 100%);
+            pointer-events: none;
+            z-index: 1;
+            animation: auroraMove 20s ease-in-out infinite;
+        }
+
+        @keyframes auroraMove {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        /* Connection Line */
+        .connection-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 3s ease forwards;
+        }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* Pulse Glow */
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        /* Heart Beat */
+        .heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Float */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Shimmer */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(26, 26, 46, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        /* Section styling */
+        section {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(10px);
+            }
+        }
+
+        /* Shooting stars */
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #FFD700, transparent);
+            animation: shoot 3s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(500px) translateY(300px);
+                opacity: 0;
+            }
+        }
+
+        /* Letter paper */
+        .letter-paper {
+            background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+            color: #1A1A2E;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Envelope */
+        .envelope {
+            perspective: 1000px;
+        }
+
+        .envelope-flap {
+            transform-origin: top;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope:hover .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        /* Music player */
+        .vinyl {
+            animation: spin 3s linear infinite paused;
+        }
+
+        .vinyl.playing {
+            animation-play-state: running;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        /* Countdown boxes */
+        .countdown-box {
+            background: linear-gradient(135deg, rgba(76, 29, 149, 0.5), rgba(49, 46, 129, 0.5));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Starfield Background -->
+    <div class="starfield" id="starfield"></div>
+    <div class="aurora"></div>
+
+    <!-- Shooting Stars -->
+    <div class="shooting-star" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="shooting-star" style="top: 30%; left: 20%; animation-delay: 2s;"></div>
+    <div class="shooting-star" style="top: 50%; left: 10%; animation-delay: 4s;"></div>
+
+    <!-- SECTION 1: HERO -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-deep via-midnight to-cosmic opacity-80"></div>
+
+        <!-- City Connection SVG -->
+        <svg class="absolute w-full h-64 bottom-32" viewBox="0 0 1200 200" preserveAspectRatio="none">
+            <!-- City 1 Silhouette -->
+            <path
+                d="M0,200 L0,150 L30,150 L30,120 L50,120 L50,100 L70,100 L70,130 L100,130 L100,80 L120,80 L120,150 L150,150 L150,200"
+                fill="#1A1A2E" />
+            <!-- City 2 Silhouette -->
+            <path
+                d="M1050,200 L1050,140 L1080,140 L1080,90 L1100,90 L1100,120 L1130,120 L1130,70 L1150,70 L1150,110 L1180,110 L1180,160 L1200,160 L1200,200"
+                fill="#1A1A2E" />
+            <!-- Connection Line -->
+            <path class="connection-line" d="M150,130 Q600,50 1050,130" stroke="url(#lineGradient)" stroke-width="3"
+                fill="none" />
+            <defs>
+                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#3B82F6" />
+                    <stop offset="50%" style="stop-color:#C084FC" />
+                    <stop offset="100%" style="stop-color:#FFD700" />
+                </linearGradient>
+            </defs>
+            <!-- Heart on path -->
+            <text id="flyingHeart" font-size="24" fill="#FFD700">❤️</text>
+        </svg>
+
+        <div class="relative z-10 text-center px-4">
+            <div class="flex justify-center gap-8 md:gap-32 mb-8" data-aos="fade-up">
+                <div class="text-center">
+                    <h3 class="font-display text-2xl md:text-3xl text-aurora">İstanbul</h3>
+                    <p class="text-sm text-gray-400 mt-1">41.0082° N, 28.9784° E</p>
+                </div>
+                <div class="text-center">
+                    <h3 class="font-display text-2xl md:text-3xl text-hope">Berlin</h3>
+                    <p class="text-sm text-gray-400 mt-1">52.5200° N, 13.4050° E</p>
+                </div>
+            </div>
+
+            <h1 class="font-display text-5xl md:text-7xl lg:text-9xl mb-6 pulse-glow" data-aos="zoom-in"
+                data-aos-delay="200">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-aurora via-starlight to-hope">1,742
+                    km</span>
+            </h1>
+            <p class="font-emotional text-2xl md:text-4xl text-white/80 mb-4" data-aos="fade-up" data-aos-delay="400">
+                Uzaklık, <span class="text-starlight">Sonsuz Aşk</span>
+            </p>
+            <p class="font-body text-lg text-gray-400 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="600">
+                Aramızdaki her kilometre, seni daha çok özlememin bir nedeni
+            </p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 scroll-indicator">
+            <i class="fas fa-plane text-3xl text-starlight rotate-90"></i>
+            <p class="text-sm text-gray-400 mt-2">Aşağı Kaydır</p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: DUAL TIME ZONES -->
+    <section id="timezones" class="min-h-screen flex items-center justify-center py-20 px-4">
+        <div class="max-w-5xl w-full">
+            <h2 class="font-display text-4xl md:text-5xl text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-clock text-aurora mr-4"></i>Farklı Saatler
+            </h2>
+            <p class="font-emotional text-xl text-center text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">
+                Ama hep aynı an...
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Istanbul Clock -->
+                <div class="glass p-8 text-center" data-aos="fade-right">
+                    <div
+                        class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-cosmic to-aurora flex items-center justify-center">
+                        <i class="fas fa-moon text-3xl text-white" id="istanbul-icon"></i>
+                    </div>
+                    <h3 class="font-display text-3xl text-aurora mb-2">İstanbul</h3>
+                    <p class="text-6xl font-display text-white mb-2" id="istanbul-time">00:00</p>
+                    <p class="text-gray-400" id="istanbul-date">24 Aralık 2024</p>
+                </div>
+
+                <!-- Berlin Clock -->
+                <div class="glass p-8 text-center" data-aos="fade-left">
+                    <div
+                        class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-indigo to-connection flex items-center justify-center">
+                        <i class="fas fa-moon text-3xl text-white" id="berlin-icon"></i>
+                    </div>
+                    <h3 class="font-display text-3xl text-hope mb-2">Berlin</h3>
+                    <p class="text-6xl font-display text-white mb-2" id="berlin-time">00:00</p>
+                    <p class="text-gray-400" id="berlin-date">24 Aralık 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: REUNION COUNTDOWN -->
+    <section id="countdown" class="min-h-screen flex items-center justify-center py-20 px-4 relative">
+        <div class="absolute inset-0 opacity-30"
+            style="background: url('../images/04_suitcase_packing.png') center/cover;"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-deep via-midnight/90 to-deep"></div>
+
+        <div class="relative z-10 text-center max-w-4xl">
+            <div class="float mb-8">
+                <i class="fas fa-plane text-6xl text-starlight"></i>
+            </div>
+            <h2 class="font-display text-4xl md:text-6xl mb-4" data-aos="fade-up">
+                Kavuşmamıza
+            </h2>
+
+            <div class="grid grid-cols-4 gap-4 md:gap-8 mb-8" data-aos="zoom-in" data-aos-delay="200">
+                <div class="countdown-box glass p-4 md:p-8 pulse-glow">
+                    <p class="text-4xl md:text-6xl font-display text-starlight" id="days">00</p>
+                    <p class="text-sm md:text-base text-gray-400">Gün</p>
+                </div>
+                <div class="countdown-box glass p-4 md:p-8 pulse-glow">
+                    <p class="text-4xl md:text-6xl font-display text-aurora" id="hours">00</p>
+                    <p class="text-sm md:text-base text-gray-400">Saat</p>
+                </div>
+                <div class="countdown-box glass p-4 md:p-8 pulse-glow">
+                    <p class="text-4xl md:text-6xl font-display text-hope" id="minutes">00</p>
+                    <p class="text-sm md:text-base text-gray-400">Dakika</p>
+                </div>
+                <div class="countdown-box glass p-4 md:p-8 pulse-glow">
+                    <p class="text-4xl md:text-6xl font-display text-connection" id="seconds">00</p>
+                    <p class="text-sm md:text-base text-gray-400">Saniye</p>
+                </div>
+            </div>
+
+            <p class="font-emotional text-xl md:text-2xl text-white/80" data-aos="fade-up" data-aos-delay="400">
+                <span class="text-starlight">14 Şubat 2025</span> - Sevgililer Günü'nde buluşuyoruz
+            </p>
+        </div>
+
+        <!-- Inline countdown script for immediate execution -->
+        <script>
+                (function () {
+                    // Calculate the NEXT February 14 dynamically
+                    var now = new Date();
+                    var currentYear = now.getFullYear();
+                    var targetDate = new Date(currentYear, 1, 14, 0, 0, 0);
+
+                    // If Feb 14 already passed this year, use next year
+                    if (now.getTime() > targetDate.getTime()) {
+                        targetDate = new Date(currentYear + 1, 1, 14, 0, 0, 0);
+                    }
+
+                    var targetTime = targetDate.getTime();
+
+                    function pad(num) {
+                        return num < 10 ? '0' + num : String(num);
+                    }
+
+                    function updateTimer() {
+                        var nowTime = new Date().getTime();
+                        var distance = targetTime - nowTime;
+
+                        var daysEl = document.getElementById('days');
+                        var hoursEl = document.getElementById('hours');
+                        var minutesEl = document.getElementById('minutes');
+                        var secondsEl = document.getElementById('seconds');
+
+                        if (distance > 0) {
+                            var days = Math.floor(distance / 86400000);
+                            var hours = Math.floor((distance % 86400000) / 3600000);
+                            var minutes = Math.floor((distance % 3600000) / 60000);
+                            var seconds = Math.floor((distance % 60000) / 1000);
+
+                            if (daysEl) daysEl.textContent = pad(days);
+                            if (hoursEl) hoursEl.textContent = pad(hours);
+                            if (minutesEl) minutesEl.textContent = pad(minutes);
+                            if (secondsEl) secondsEl.textContent = pad(seconds);
+                        } else {
+                            // Show zeros if passed (shouldn't happen with dynamic calc)
+                            if (daysEl) daysEl.textContent = '00';
+                            if (hoursEl) hoursEl.textContent = '00';
+                            if (minutesEl) minutesEl.textContent = '00';
+                            if (secondsEl) secondsEl.textContent = '00';
+                        }
+                    }
+
+                    updateTimer();
+                    setInterval(updateTimer, 1000);
+                })();
+        </script>
+    </section>
+
+    <!-- SECTION 4: VIDEO CALLS -->
+    <section id="calls" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-display text-4xl md:text-5xl text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-video text-connection mr-4"></i>Görüntülü Konuşmalarımız
+            </h2>
+            <p class="font-emotional text-xl text-center text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">
+                Seni görmek için geçen her dakika...
+            </p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Call 1 -->
+                <div class="glass p-4 group cursor-pointer gallery-item" data-aos="fade-up"
+                    data-src="../images/02_hero_video_call.png">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="../images/02_hero_video_call.png" alt="Video Call"
+                            class="w-full h-64 object-cover transition-transform group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-deep to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <p class="text-white font-bold">3 saat 24 dakika</p>
+                                <p class="text-gray-300 text-sm">O günün en güzel anı</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-red-500 px-2 py-1 rounded-full text-xs flex items-center gap-1">
+                                <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span> REC
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-gray-400 text-sm"><i class="far fa-calendar mr-2"></i>15 Aralık 2024</span>
+                        <i class="fas fa-heart text-aurora"></i>
+                    </div>
+                </div>
+
+                <!-- Call 2 -->
+                <div class="glass p-4 group cursor-pointer gallery-item" data-aos="fade-up" data-aos-delay="100"
+                    data-src="../images/10_morning_goodnight_ritual.png">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="../images/10_morning_goodnight_ritual.png" alt="Morning Call"
+                            class="w-full h-64 object-cover transition-transform group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-deep to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <p class="text-white font-bold">Günaydın ritüelimiz</p>
+                                <p class="text-gray-300 text-sm">Her sabah seninle başlıyor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-gray-400 text-sm"><i class="far fa-calendar mr-2"></i>Her Sabah</span>
+                        <i class="fas fa-sun text-hope"></i>
+                    </div>
+                </div>
+
+                <!-- Call 3 -->
+                <div class="glass p-4 group cursor-pointer gallery-item" data-aos="fade-up" data-aos-delay="200"
+                    data-src="../images/13_rainy_window_voice_note.png">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="../images/13_rainy_window_voice_note.png" alt="Rainy Call"
+                            class="w-full h-64 object-cover transition-transform group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-deep to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-4 left-4 right-4">
+                                <p class="text-white font-bold">Yağmurlu geceler</p>
+                                <p class="text-gray-300 text-sm">Seninle konuşmak en güzel liman</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-gray-400 text-sm"><i class="far fa-calendar mr-2"></i>20 Kasım 2024</span>
+                        <i class="fas fa-cloud-rain text-connection"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: LOVE LETTERS -->
+    <section id="letters" class="py-20 px-4 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-display text-4xl md:text-5xl text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-envelope-open-text text-hope mr-4"></i>Dijital Mektuplarımız
+            </h2>
+            <p class="font-emotional text-xl text-center text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">
+                Kelimelerle örülmüş özlem...
+            </p>
+
+            <div class="swiper letters-swiper">
+                <div class="swiper-wrapper">
+                    <!-- Letter 1 -->
+                    <div class="swiper-slide">
+                        <div class="glass p-8 max-w-2xl mx-auto" data-aos="fade-up">
+                            <div class="letter-paper p-8 rounded-lg relative">
+                                <div
+                                    class="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-16 bg-red-700 rounded-full flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-heart text-white text-2xl"></i>
+                                </div>
+                                <p class="font-emotional text-lg leading-relaxed mt-8 text-gray-800">
+                                    Sevgilim,<br><br>
+                                    Bu gece yine yıldızlara baktım ve hepsinin bize ulaştığını hayal ettim.
+                                    Aramızdaki her kilometre, sana olan sevgimin bir kanıtı.
+                                    Yakında kavuşacağız, o güne kadar her anın değerini biliyorum.<br><br>
+                                    Seni sonsuz seviyorum,<br>
+                                    <span class="font-bold">Ayşe</span>
+                                </p>
+                                <p class="text-right text-gray-500 text-sm mt-4">10 Aralık 2024</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Letter 2 -->
+                    <div class="swiper-slide">
+                        <div class="glass p-8 max-w-2xl mx-auto">
+                            <div class="letter-paper p-8 rounded-lg relative">
+                                <div
+                                    class="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-16 bg-red-700 rounded-full flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-heart text-white text-2xl"></i>
+                                </div>
+                                <p class="font-emotional text-lg leading-relaxed mt-8 text-gray-800">
+                                    Canım,<br><br>
+                                    Bugün sokakta senin parfümünü koklayan birini gördüm ve bir an için
+                                    yanımda olduğunu sandım. Bu mesafe zor ama biliyorum ki bu bizi
+                                    daha da güçlü yapıyor. Sen benim en büyük motivasyonumsun.<br><br>
+                                    Hep seninle,<br>
+                                    <span class="font-bold">Mehmet</span>
+                                </p>
+                                <p class="text-right text-gray-500 text-sm mt-4">5 Aralık 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination mt-8"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: CARE PACKAGES -->
+    <section id="packages" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-display text-4xl md:text-5xl text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-gift text-aurora mr-4"></i>Aşk Paketlerimiz
+            </h2>
+            <p class="font-emotional text-xl text-center text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">
+                Sevgi, mesafe tanımaz...
+            </p>
+
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div
+                    class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-aurora via-starlight to-hope">
+                </div>
+
+                <!-- Package 1 -->
+                <div class="flex items-center mb-12" data-aos="fade-right">
+                    <div class="w-1/2 pr-8 text-right">
+                        <div class="glass p-6">
+                            <img src="../images/08_handwritten_letter_closeup.png" alt="Letter"
+                                class="w-full h-40 object-cover rounded-lg mb-4">
+                            <h4 class="font-display text-xl text-starlight">El Yazısı Mektup</h4>
+                            <p class="text-gray-400 text-sm">Kalp kokulu, gözyaşı lekeli</p>
+                            <p class="text-aurora text-xs mt-2">İstanbul → Berlin</p>
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 bg-starlight rounded-full z-10 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-deep text-xs"></i>
+                    </div>
+                    <div class="w-1/2 pl-8">
+                        <p class="text-gray-400">1 Aralık 2024</p>
+                    </div>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="flex items-center mb-12" data-aos="fade-left">
+                    <div class="w-1/2 pr-8 text-right">
+                        <p class="text-gray-400">15 Kasım 2024</p>
+                    </div>
+                    <div class="w-8 h-8 bg-aurora rounded-full z-10 flex items-center justify-center">
+                        <i class="fas fa-arrow-left text-deep text-xs"></i>
+                    </div>
+                    <div class="w-1/2 pl-8">
+                        <div class="glass p-6">
+                            <img src="../images/09_polaroid_wall_memories.png" alt="Polaroids"
+                                class="w-full h-40 object-cover rounded-lg mb-4">
+                            <h4 class="font-display text-xl text-aurora">Polaroid Koleksiyonu</h4>
+                            <p class="text-gray-400 text-sm">Anılarımızın fotoğrafları</p>
+                            <p class="text-hope text-xs mt-2">Berlin → İstanbul</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: REUNION GALLERY -->
+    <section id="reunions" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-display text-4xl md:text-5xl text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-heart text-connection mr-4"></i>Kavuşma Anlarımız
+            </h2>
+            <p class="font-emotional text-xl text-center text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">
+                Bekleyiş bittiğinde...
+            </p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass overflow-hidden group cursor-pointer gallery-item" data-aos="zoom-in"
+                    data-src="../images/05_airport_hug_reunion.png">
+                    <div class="relative">
+                        <img src="../images/05_airport_hug_reunion.png" alt="Airport Reunion"
+                            class="w-full h-72 object-cover transition-transform group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-deep/80 to-transparent flex items-end p-6">
+                            <div>
+                                <h4 class="font-display text-xl text-white">Havalimanı Kavuşması</h4>
+                                <p class="text-gray-300 text-sm">Kasım 2024, İstanbul</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fas fa-heart text-3xl text-aurora heartbeat"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass overflow-hidden group cursor-pointer gallery-item" data-aos="zoom-in"
+                    data-aos-delay="100" data-src="../images/14_final_cinematic_together.png">
+                    <div class="relative">
+                        <img src="../images/14_final_cinematic_together.png" alt="Together"
+                            class="w-full h-72 object-cover transition-transform group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-deep/80 to-transparent flex items-end p-6">
+                            <div>
+                                <h4 class="font-display text-xl text-white">Birlikte Geçen Günler</h4>
+                                <p class="text-gray-300 text-sm">Ekim 2024, Berlin</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fas fa-heart text-3xl text-aurora heartbeat"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass overflow-hidden group cursor-pointer gallery-item" data-aos="zoom-in"
+                    data-aos-delay="200" data-src="../images/03_city_lights_distance.png">
+                    <div class="relative">
+                        <img src="../images/03_city_lights_distance.png" alt="City Lights"
+                            class="w-full h-72 object-cover transition-transform group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-deep/80 to-transparent flex items-end p-6">
+                            <div>
+                                <h4 class="font-display text-xl text-white">Şehir Işıkları Altında</h4>
+                                <p class="text-gray-300 text-sm">Eylül 2024</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fas fa-heart text-3xl text-aurora heartbeat"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: PLAYLIST -->
+    <section id="playlist" class="py-20 px-4 relative">
+        <div class="absolute inset-0 opacity-20"
+            style="background: url('../images/07_shared_playlist_headphones.png') center/cover;"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-deep via-midnight/95 to-deep"></div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <h2 class="font-display text-4xl md:text-5xl text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-music text-starlight mr-4"></i>Aramızdaki Şarkılar
+            </h2>
+            <p class="font-emotional text-xl text-center text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">
+                Bizi birbirimize bağlayan melodiler...
+            </p>
+
+            <div class="glass p-8" data-aos="fade-up">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <!-- Vinyl -->
+                    <div class="relative w-48 h-48 flex-shrink-0">
+                        <div class="vinyl w-full h-full rounded-full bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center shadow-2xl"
+                            id="vinyl">
+                            <div class="w-16 h-16 rounded-full bg-starlight flex items-center justify-center">
+                                <i class="fas fa-heart text-deep text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Player -->
+                    <div class="flex-1 text-center md:text-left">
+                        <h3 class="font-display text-2xl text-starlight mb-2">Nilüfer - Ta Uzak Yollardan</h3>
+                        <p class="text-gray-400 mb-6">Bu şarkı, aramızdaki mesafenin en güzel ifadesi...</p>
+
+                        <audio id="audioPlayer" src="../images/Nilufer-Ta-Uzak-Yollardan.mp3"></audio>
+
+                        <div class="flex items-center gap-4 justify-center md:justify-start">
+                            <button id="playBtn"
+                                class="w-14 h-14 rounded-full bg-gradient-to-r from-aurora to-starlight flex items-center justify-center hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-deep text-xl" id="playIcon"></i>
+                            </button>
+                            <div class="flex-1 max-w-xs">
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-aurora to-starlight w-0 transition-all"
+                                        id="progressBar"></div>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                    <span id="currentTime">0:00</span>
+                                    <span id="duration">0:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: FUTURE PLANS -->
+    <section id="future" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-display text-4xl md:text-5xl mb-4" data-aos="fade-up">
+                <i class="fas fa-home text-hope mr-4"></i>Sonunda Birlikte
+            </h2>
+            <p class="font-emotional text-xl text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">
+                Gelecekte bizi bekleyen yuva...
+            </p>
+
+            <div class="glass p-8" data-aos="zoom-in">
+                <img src="../images/12_map_line_connection.png" alt="Our Future Home"
+                    class="w-full h-64 object-cover rounded-lg mb-8">
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="text-center">
+                        <i class="fas fa-heart text-aurora text-4xl mb-4"></i>
+                        <h3 class="font-display text-2xl text-white">İstanbul</h3>
+                        <p class="text-gray-400">Evimiz olacak şehir</p>
+                    </div>
+                    <div class="hidden md:block">
+                        <i class="fas fa-arrow-right text-4xl text-starlight"></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-32 h-32 rounded-full glass flex items-center justify-center pulse-glow">
+                            <span class="font-display text-3xl text-starlight">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="font-emotional text-xl text-white/80 mt-8">
+                    "Bir gün aynı gökyüzünün altında uyanacağız"
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: FINALE -->
+    <section id="finale" class="min-h-screen flex items-center justify-center py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0"
+            style="background: url('../images/14_final_cinematic_together.png') center/cover;">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-b from-deep/90 via-midnight/80 to-deep/90"></div>
+
+        <!-- World Map SVG -->
+        <svg class="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 1000 500">
+            <ellipse cx="500" cy="250" rx="400" ry="200" stroke="#FFD700" stroke-width="1" fill="none"
+                stroke-dasharray="5,5" />
+            <circle cx="300" cy="200" r="10" fill="#C084FC" class="pulse-glow" />
+            <circle cx="700" cy="180" r="10" fill="#FDE68A" class="pulse-glow" />
+            <path d="M300,200 Q500,100 700,180" stroke="url(#mapLineGradient)" stroke-width="2" fill="none"
+                class="connection-line" />
+            <defs>
+                <linearGradient id="mapLineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#C084FC" />
+                    <stop offset="100%" style="stop-color:#FDE68A" />
+                </linearGradient>
+            </defs>
+        </svg>
+
+        <div class="relative z-10 text-center max-w-4xl">
+            <h2 class="font-display text-5xl md:text-7xl lg:text-8xl mb-8" data-aos="zoom-in">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-aurora via-starlight to-hope">
+                    Mesafe Sadece Bir Sayı
+                </span>
+            </h2>
+
+            <i class="fas fa-heart text-6xl text-aurora heartbeat mb-8" data-aos="fade-up" data-aos-delay="200"></i>
+
+            <p class="font-emotional text-2xl md:text-3xl text-white/80 mb-8" data-aos="fade-up" data-aos-delay="400">
+                "Seninle her an, her yerde birlikteyim.<br>Kalbim senin olduğu yerde"
+            </p>
+
+            <div class="flex justify-center gap-8" data-aos="fade-up" data-aos-delay="600">
+                <div class="text-center">
+                    <p class="text-aurora font-display text-xl">İstanbul</p>
+                    <p class="text-gray-400 text-sm">41.0082° N</p>
+                </div>
+                <div class="text-starlight text-2xl">↔</div>
+                <div class="text-center">
+                    <p class="text-hope font-display text-xl">Berlin</p>
+                    <p class="text-gray-400 text-sm">52.5200° N</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 px-4 border-t border-white/10">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="font-display text-2xl text-white mb-4">
+                İki şehir, <span class="text-aurora">bir kalp</span>
+            </p>
+            <p class="text-gray-400 mb-8">
+                41.0082° N, 28.9784° E → 52.5200° N, 13.4050° E
+            </p>
+
+            <div class="flex justify-center gap-6">
+                <a href="#"
+                    class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-aurora/20 transition-colors">
+                    <i class="fab fa-whatsapp text-xl text-green-500"></i>
+                </a>
+                <a href="#"
+                    class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-aurora/20 transition-colors">
+                    <i class="fab fa-instagram text-xl text-pink-500"></i>
+                </a>
+                <a href="#"
+                    class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-aurora/20 transition-colors">
+                    <i class="fas fa-share-alt text-xl text-connection"></i>
+                </a>
+            </div>
+
+            <p class="text-gray-500 text-sm mt-8">
+                Aşkla yapıldı ❤️ 2024
+            </p>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="absolute top-4 right-4 text-white text-4xl hover:text-aurora transition-colors"
+            id="closeLightbox">
+            <i class="fas fa-times"></i>
+        </button>
+        <img src="" alt="Lightbox Image" id="lightboxImg">
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Wait for DOM and libraries to load
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM loaded, initializing...');
+
+            // Initialize AOS
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 1000,
+                    once: true,
+                    offset: 100
+                });
+            }
+
+            // Create Starfield
+            function createStarfield() {
+                const starfield = document.getElementById('starfield');
+                if (!starfield) return;
+                const starCount = 200;
+
+                for (let i = 0; i < starCount; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.style.cssText = `
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          width: ${Math.random() * 3 + 1}px;
+          height: ${Math.random() * 3 + 1}px;
+          --opacity: ${Math.random() * 0.5 + 0.3};
+          --duration: ${Math.random() * 3 + 2}s;
+          animation-delay: ${Math.random() * 2}s;
+        `;
+                    starfield.appendChild(star);
+                }
+            }
+            createStarfield();
+
+            // Live Clocks
+            function updateClocks() {
+                const now = new Date();
+
+                // Istanbul (UTC+3)
+                const istanbul = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Istanbul" }));
+                document.getElementById('istanbul-time').textContent = istanbul.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+                document.getElementById('istanbul-date').textContent = istanbul.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+                const istanbulHour = istanbul.getHours();
+                document.getElementById('istanbul-icon').className = (istanbulHour >= 6 && istanbulHour < 20) ? 'fas fa-sun text-3xl text-hope' : 'fas fa-moon text-3xl text-white';
+
+                // Berlin (UTC+1)
+                const berlin = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Berlin" }));
+                document.getElementById('berlin-time').textContent = berlin.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+                document.getElementById('berlin-date').textContent = berlin.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+                const berlinHour = berlin.getHours();
+                document.getElementById('berlin-icon').className = (berlinHour >= 6 && berlinHour < 20) ? 'fas fa-sun text-3xl text-hope' : 'fas fa-moon text-3xl text-white';
+            }
+            updateClocks();
+            setInterval(updateClocks, 1000);
+
+        }); // End DOMContentLoaded
+
+        // GSAP Animations - Initialize when ready
+        document.addEventListener('DOMContentLoaded', function () {
+            gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+            // Flying Heart Animation
+            gsap.to("#flyingHeart", {
+                motionPath: {
+                    path: "M150,130 Q600,50 1050,130",
+                    align: "self",
+                    alignOrigin: [0.5, 0.5]
+                },
+                duration: 5,
+                repeat: -1,
+                ease: "none"
+            });
+
+            // Letters Swiper
+            new Swiper('.letters-swiper', {
+                effect: 'cards',
+                grabCursor: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                }
+            });
+
+            // Music Player
+            const audio = document.getElementById('audioPlayer');
+            const playBtn = document.getElementById('playBtn');
+            const playIcon = document.getElementById('playIcon');
+            const vinyl = document.getElementById('vinyl');
+            const progressBar = document.getElementById('progressBar');
+            const currentTimeEl = document.getElementById('currentTime');
+            const durationEl = document.getElementById('duration');
+
+            playBtn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    playIcon.className = 'fas fa-pause text-deep text-xl';
+                    vinyl.classList.add('playing');
+                } else {
+                    audio.pause();
+                    playIcon.className = 'fas fa-play text-deep text-xl';
+                    vinyl.classList.remove('playing');
+                }
+            });
+
+            audio.addEventListener('timeupdate', () => {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = progress + '%';
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            });
+
+            audio.addEventListener('loadedmetadata', () => {
+                durationEl.textContent = formatTime(audio.duration);
+            });
+
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            // Lightbox
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const closeLightbox = document.getElementById('closeLightbox');
+
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    lightboxImg.src = item.dataset.src;
+                    lightbox.classList.add('active');
+                });
+            });
+
+            closeLightbox.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+            });
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                }
+            });
+
+            // Parallax on scroll
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                document.querySelectorAll('.star').forEach((star, i) => {
+                    const speed = (i % 3 + 1) * 0.1;
+                    star.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+
+            console.log('GSAP and other initializations complete!');
+        }); // End GSAP DOMContentLoaded
+    </script>
+</body>
+
+</html>
